@@ -1,25 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+// ShowName print your name, return the same value in pointer
+func ShowName(a *string) (*string, error) {
+	if *a == "" {
+		return a, errors.New("404")
+	} else {
+		return a, nil
+	}
+}
 
 func main()  {
+	name := "Antonio"
+	valor, err := ShowName(&name)
+	if err == nil {
+		fmt.Printf("Name: %s\n",*valor)
+	} else {
+		fmt.Errorf("Error name print: %v\n", err)
+	}
 
-	a := 10
-
-	fmt.Println("Let's Go!")
-	fmt.Printf("The value I have now is: %v \n", a)
-	fmt.Printf("Memory of a is: %v \n", &a)
-
-	var pointer *int = &a
-
-	fmt.Printf("Pointer value is: %v \n", pointer)
-	fmt.Println("Value of pointer is:", *pointer)
-
-	b := 11
-	pointer = &b
-
-	fmt.Printf("Now the memory position of pointer is %v \n", &pointer)
-	fmt.Printf("Now the value of a is %v and pointer is %v \n", *pointer, a)
+	name2 := ""
+	valor, err = ShowName(&name2)
+	if err == nil {
+		fmt.Printf("Name: %s\n", *valor)
+	} else {
+		fmt.Errorf("Error name print: %v\n", err)
+	}
 }
 
 
